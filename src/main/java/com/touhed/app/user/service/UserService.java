@@ -17,10 +17,6 @@ public class UserService {
 
     public UserResponse create( AddUserRequest request ) {
 
-        if( userRepository.existsByEmail( request.getEmail() ) ) {
-            throw new RuntimeException( "Email already exists" );
-        }
-
         request.setPassword( passwordEncoder.encode( request.getPassword() ) );
         User user = new User( request );
         User savedUser = userRepository.save(user);

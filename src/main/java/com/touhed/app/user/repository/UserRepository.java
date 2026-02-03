@@ -13,14 +13,4 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail( String email );
-
-    @Modifying
-    @Query(
-            "update User " +
-                    "set refreshToken = ?2 " +
-                    "where id = ?1"
-    )
-    void updateRefreshTokenById( long id, String refreshToken );
-
-    boolean existsByEmail(@NotBlank(message = "Email is required") @Email(message = "Email should be valid") String email);
 }
