@@ -46,7 +46,8 @@ public class AuthService {
         String accessToken = jwtUtil.generateAccessToken( userDetails );
         String refreshToken = jwtUtil.generateRefreshToken( userDetails );
 
-        userRepository.updateRefreshTokenById( userDetails.getUser().getId(), refreshToken );
+        if( userDetails != null )
+            userRepository.updateRefreshTokenById( userDetails.getUser().getId(), refreshToken );
 
         return ResponseEntity.ok( new AuthResponse( accessToken, refreshToken ) );
     }

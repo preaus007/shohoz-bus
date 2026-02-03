@@ -2,7 +2,6 @@ package com.touhed.app.auth.controller;
 
 import com.touhed.app.auth.request.LoginRequest;
 import com.touhed.app.auth.request.RefreshRequest;
-import com.touhed.app.auth.response.AuthResponse;
 import com.touhed.app.auth.service.AuthService;
 import com.touhed.app.security.JwtUtil;
 import lombok.RequiredArgsConstructor;

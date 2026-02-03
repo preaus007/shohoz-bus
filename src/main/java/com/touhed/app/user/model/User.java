@@ -1,10 +1,5 @@
 package com.touhed.app.user.model;
 
-import com.touhed.app.booking.model.Booking;
-import com.touhed.app.cancellation.model.Cancellation;
-import com.touhed.app.driver.model.Driver;
-import com.touhed.app.fullbusrequest.model.FullBusRequest;
-import com.touhed.app.review.model.Review;
 import com.touhed.app.user.BloodGroup;
 import com.touhed.app.user.Gender;
 import com.touhed.app.user.UserRole;
@@ -20,9 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
