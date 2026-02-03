@@ -3,13 +3,14 @@ package com.touhed.app.user;
 import lombok.Getter;
 
 @Getter
-public enum Role {
-    ADMIN( "Admin" ),
-    USER( "User" );
+public enum UserRole {
+    CUSTOMER( "Customer" ),
+    DRIVER( "Driver" ),
+    ADMIN( "Admin" );
 
     private final String value;
 
-    Role( String value ) {
+    UserRole( String value ) {
         this.value = value;
     }
 }
