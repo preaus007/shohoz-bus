@@ -25,27 +25,28 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final LoggedInUserService loggedInUserService;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final LoggedInUserService loggedInUserService;
 
     @Transactional
     public ResponseEntity<?> login( LoginRequest loginRequest ) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken( loginRequest.getEmail(), loginRequest.getPassword() )
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
+                )
         );
+
         SecurityContextHolder.getContext().setAuthentication( authentication );
 
-        CustomUserDetails userDetails = ( CustomUserDetails ) authentication.getPrincipal();
-
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String accessToken = jwtUtil.generateAccessToken( userDetails );
         String refreshToken = jwtUtil.generateRefreshToken( userDetails );
-        String encryptedRefreshToken = passwordEncoder.encode( refreshToken );
 
-        assert userDetails != null;
-        userRepository.updateRefreshTokenById( userDetails.getUser().getId(), encryptedRefreshToken );
+        userRepository.updateRefreshTokenById( userDetails.getUser().getId(), refreshToken );
 
         return ResponseEntity.ok( new AuthResponse( accessToken, refreshToken ) );
     }

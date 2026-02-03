@@ -31,18 +31,8 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     public static final String[] PUBLIC_API_ENDPOINTS = {
-            "/auth/**",
-            "/digihr-api-docs/**",
-            "/swagger-ui/**",
-            "/v3/api-docs/**",
-            "/job-applications/**",
-            "/contactus/**"
+            "/auth/**"
     };
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -52,7 +42,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain( HttpSecurity http ){
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    @Bean
+    public SecurityFilterChain securityFilterChain( HttpSecurity http ) throws Exception {
         return http
                 .cors( Customizer.withDefaults() )
                 .sessionManagement( AbstractHttpConfigurer::disable )
@@ -60,9 +56,8 @@ public class SecurityConfig {
                 .httpBasic( AbstractHttpConfigurer::disable )
                 .formLogin( AbstractHttpConfigurer::disable )
                 .authorizeHttpRequests(
-                auth ->
-                        auth.requestMatchers( PUBLIC_API_ENDPOINTS ).permitAll()
-                        .anyRequest().authenticated()
+                        auth -> auth.requestMatchers( PUBLIC_API_ENDPOINTS ).permitAll()
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore( jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class )
                 .build();

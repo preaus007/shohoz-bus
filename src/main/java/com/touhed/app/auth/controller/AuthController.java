@@ -2,6 +2,7 @@ package com.touhed.app.auth.controller;
 
 import com.touhed.app.auth.request.LoginRequest;
 import com.touhed.app.auth.request.RefreshRequest;
+import com.touhed.app.auth.response.AuthResponse;
 import com.touhed.app.auth.service.AuthService;
 import com.touhed.app.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,9 @@ public class AuthController {
     @PostMapping( "/refresh" )
     public ResponseEntity<?> refresh( @RequestBody RefreshRequest refreshRequest ) throws AuthenticationException {
 
-        if (!jwtUtil.validateToken( refreshRequest.getToken() ) ) {
-            return ResponseEntity.status( 401 ).body("Invalid or expired refresh token");
-        }
+        if( !jwtUtil.validateToken( refreshRequest.getToken() ) )
+            return ResponseEntity.status(401).body("Invalid or expired refresh token");
+
         return ResponseEntity.ok( authService.refresh( refreshRequest ) );
     }
 

@@ -70,7 +70,7 @@ public class User extends AuditableEntity {
     @Column( nullable = false, length = 20 )
     private UserStatus status = UserStatus.ACTIVE;
 
-    @Column( name = "refresh_token" )
+    @Column( name = "refresh_token", length = 300 )
     private String refreshToken;
 
     public User( AddUserRequest request ) {

@@ -1,10 +1,7 @@
 package com.touhed.app.security;
 
 import com.touhed.app.security.service.CustomUserDetailsService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +41,7 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put( "email", customUserDetails.getUser().getEmail() );
         claims.put( "role", customUserDetails.getUser().getRole() );
-        claims.put( "name", customUserDetails.getUser().getName() );
+        claims.put( "fullName", customUserDetails.getUser().getFullName() );
         claims.put( "id", customUserDetails.getUser().getId() );
 
         return Jwts.builder()
@@ -81,9 +78,10 @@ public class JwtUtil {
         } catch ( ExpiredJwtException e ) {
             System.out.println( "JWT expired at: " + e.getClaims().getExpiration() );
             return false;
-        } catch (JwtException | IllegalArgumentException e ) {
+        } catch ( JwtException | IllegalArgumentException e ) {
             System.out.println( "Invalid JWT: " + e.getMessage() );
             return false;
         }
     }
 }
+

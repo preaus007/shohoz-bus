@@ -39,6 +39,6 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
 jwt:
-  secret: "NMAFXibzdw1VMa52BXpMfEY5zxoA1pKUZN0jzSYKEkkNMAfEibzdw1VMa52BXpMfEY5zxoA1pKUZN0jzSYKEkk"
-  expiration: 864000000
+  secret: v7rZx8cW6h4rG9MZKkZ3n8y2yX5z2mK8nM8m5kM8F1JqQZQXv7XhFQyH2P7d1Z2v7rZx8cW6h4rG9MZKkZ3n8y2yX5z2mK8nM8m5kM8F1JqQZQXv7XhFQyH2P7d1Z2
+  expiration: 3600000
   refresh-token-expiration: 864000000
