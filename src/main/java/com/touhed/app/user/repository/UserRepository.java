@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     WHERE u.id = ?1
     """ )
     void updateRefreshTokenById( Long id, String refreshToken );
+
+    Collection<Object> findByIdIn(List<Long> driversId);
 }
